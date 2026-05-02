@@ -1,0 +1,4 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+header { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; }
+main { padding: 1.5rem; }
