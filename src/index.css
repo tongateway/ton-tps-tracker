@@ -1,4 +1,57 @@
 * { box-sizing: border-box; }
-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-header { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; }
-main { padding: 1.5rem; }
+body {
+  margin: 0;
+  background: #07111f;
+  color: #edf6ff;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.2);
+}
+.dashboard {
+  display: grid;
+  gap: 1rem;
+  max-width: 860px;
+  padding: 1.5rem;
+}
+.tps-card {
+  border: 1px solid rgba(45, 212, 191, 0.36);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(14, 116, 144, 0.25));
+  padding: 1.5rem;
+}
+.eyebrow,
+.tps-label,
+.meta-grid span {
+  color: #93c5fd;
+}
+.tps-value {
+  display: block;
+  color: #67e8f9;
+  font-size: clamp(3rem, 14vw, 7rem);
+  line-height: 1;
+}
+.status {
+  color: #a7f3d0;
+  min-height: 1.4em;
+}
+.status.error { color: #fca5a5; }
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.meta-grid div {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.meta-grid strong {
+  display: block;
+  font-size: 1.4rem;
+  margin-top: 0.35rem;
+}
+@media (max-width: 620px) {
+  .meta-grid { grid-template-columns: 1fr; }
+}
