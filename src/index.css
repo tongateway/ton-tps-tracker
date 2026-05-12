@@ -21,6 +21,23 @@ header {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(14, 116, 144, 0.25));
   padding: 1.5rem;
 }
+.tps-card.error { border-color: rgba(248, 113, 113, 0.5); }
+.tps-card.loading { border-color: rgba(147, 197, 253, 0.4); }
+.card-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.connection-dot {
+  border-radius: 999px;
+  display: inline-block;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+.connection-dot.ready { background: #34d399; box-shadow: 0 0 16px rgba(52, 211, 153, 0.75); }
+.connection-dot.error { background: #f87171; box-shadow: 0 0 16px rgba(248, 113, 113, 0.7); }
+.connection-dot.loading { background: #93c5fd; box-shadow: 0 0 16px rgba(147, 197, 253, 0.65); }
 .eyebrow,
 .tps-label,
 .meta-grid span {
@@ -34,9 +51,16 @@ header {
 }
 .status {
   color: #a7f3d0;
+  display: grid;
+  gap: 0.25rem;
   min-height: 1.4em;
 }
 .status.error { color: #fca5a5; }
+.status.loading { color: #bfdbfe; }
+.status small {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
 .meta-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
