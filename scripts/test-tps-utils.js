@@ -8,6 +8,7 @@ import {
 } from '../src/utils/tps.js'
 import { connectionStatus, formatTps } from '../src/utils/displayState.js'
 import { appendSample, DEFAULT_WINDOW_SECONDS } from '../src/utils/tpsHistory.js'
+import { computeStats } from '../src/utils/stats.js'
 
 const blocks = [
   { seqno: 3, gen_utime: 130, tx_count: 40 },
@@ -71,5 +72,29 @@ assert.deepEqual(h4, [
 assert.equal(appendSample(h1, null), h1)
 assert.equal(appendSample(h1, { ts: Number.NaN, tps: 1 }), h1)
 assert.equal(appendSample(h1, { ts: t0, tps: Number.NaN }), h1)
+
+// computeStats
+assert.deepEqual(computeStats([]), {
+  avgTps: 0, peakTps: 0, totalTx: 0, windowSeconds: 0, sampleCount: 0,
+})
+
+const statsT0 = 1_700_000_000_000
+const statsHistory = [
+  { ts: statsT0, tps: 4 },
+  { ts: statsT0 + 5000, tps: 8 },
+  { ts: statsT0 + 10000, tps: 6 },
+]
+const stats = computeStats(statsHistory)
+assert.equal(stats.avgTps, 6)
+assert.equal(stats.peakTps, 8)
+assert.equal(stats.windowSeconds, 10)
+assert.equal(stats.sampleCount, 3)
+// trapezoid: ((4+8)/2)*5 + ((8+6)/2)*5 = 30 + 35 = 65
+assert.equal(stats.totalTx, 65)
+
+// ignores invalid samples
+assert.deepEqual(computeStats([{ ts: 'bad', tps: 1 }, { ts: 1, tps: 'bad' }]), {
+  avgTps: 0, peakTps: 0, totalTx: 0, windowSeconds: 0, sampleCount: 0,
+})
 
 console.log('tps utility tests passed')
