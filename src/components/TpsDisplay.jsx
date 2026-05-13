@@ -1,6 +1,7 @@
+import { memo, useMemo } from 'react'
 import { connectionStatus, formatTps } from '../utils/displayState.js'
 
-export default function TpsDisplay({
+function TpsDisplay({
   status,
   tps,
   totalTransactions,
@@ -9,7 +10,14 @@ export default function TpsDisplay({
   error,
   updatedAt,
 }) {
-  const connection = connectionStatus({ status, error, updatedAt })
+  const connection = useMemo(
+    () => connectionStatus({ status, error, updatedAt }),
+    [status, error, updatedAt],
+  )
+  const formattedTps = useMemo(
+    () => formatTps(status === 'ready' ? tps : Number.NaN),
+    [status, tps],
+  )
 
   return (
     <section className={`tps-card ${connection.tone}`} aria-live="polite">
@@ -17,7 +25,7 @@ export default function TpsDisplay({
         <p className="eyebrow">Live TON throughput</p>
         <span className={`connection-dot ${connection.tone}`} />
       </div>
-      <strong className="tps-value">{formatTps(status === 'ready' ? tps : Number.NaN)}</strong>
+      <strong className="tps-value">{formattedTps}</strong>
       <span className="tps-label">transactions / second</span>
       <p className={`status ${connection.tone}`}>
         <span>{connection.label}</span>
@@ -40,3 +48,5 @@ export default function TpsDisplay({
     </section>
   )
 }
+
+export default memo(TpsDisplay)
