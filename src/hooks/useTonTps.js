@@ -44,11 +44,11 @@ export function useTonTps({
       const attempt = attemptRef.current
       attemptRef.current += 1
       if (!cancelledRef.current) {
-        setState((current) => ({
-          ...current,
-          status: 'error',
-          error: error.message,
-        }))
+        setState((current) =>
+          current.status === 'error' && current.error === error.message
+            ? current
+            : { ...current, status: 'error', error: error.message },
+        )
       }
       window.clearTimeout(timerRef.current)
       timerRef.current = window.setTimeout(load, retryDelay(attempt))
