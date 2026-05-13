@@ -61,6 +61,23 @@ header {
   color: #94a3b8;
   font-size: 0.82rem;
 }
+.retry-button {
+  align-self: flex-start;
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 8px;
+  color: #fecaca;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 0.9rem;
+  transition: background 120ms ease;
+}
+.retry-button:hover { background: rgba(248, 113, 113, 0.25); }
+.retry-button:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 2px;
+}
 .meta-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

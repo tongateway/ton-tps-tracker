@@ -1,9 +1,18 @@
-export function connectionStatus({ status, error, updatedAt } = {}) {
+import { friendlyErrorMessage } from './errors.js'
+
+export function connectionStatus({ status, error, errorKind, attempt, nextRetryMs, updatedAt } = {}) {
   if (status === 'loading') {
     return { tone: 'loading', label: 'Connecting to TON RPC', detail: 'Fetching latest blocks' }
   }
   if (status === 'error') {
-    return { tone: 'error', label: 'RPC retrying', detail: error || 'Temporary TON RPC error' }
+    const label = friendlyErrorMessage({ kind: errorKind, message: error })
+    const parts = []
+    if (Number.isFinite(attempt) && attempt > 0) parts.push(`attempt ${attempt}`)
+    if (Number.isFinite(nextRetryMs) && nextRetryMs > 0) {
+      parts.push(`retrying in ${Math.round(nextRetryMs / 1000)}s`)
+    }
+    const detail = parts.length ? parts.join(' · ') : error || 'Temporary TON RPC error'
+    return { tone: 'error', label, detail }
   }
   if (status === 'ready') {
     return {
