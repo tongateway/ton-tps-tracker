@@ -9,12 +9,13 @@ export default function App() {
   const history = useTpsHistory(ton)
 
   return (
-    <div>
+    <>
+      <a href="#main" className="skip-link">Skip to main content</a>
       <Header />
-      <main className="dashboard">
+      <main id="main" className="dashboard" tabIndex={-1}>
         <TpsDisplay {...ton} />
         <TpsHistoryChart history={history} />
       </main>
-    </div>
+    </>
   )
 }

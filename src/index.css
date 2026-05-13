@@ -1,20 +1,47 @@
+:root { color-scheme: dark; }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   background: #07111f;
   color: #edf6ff;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 header {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid rgba(125, 211, 252, 0.2);
 }
+header h1 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+}
+.skip-link {
+  background: #67e8f9;
+  border-radius: 6px;
+  color: #07111f;
+  font-weight: 600;
+  left: 0.75rem;
+  padding: 0.5rem 0.85rem;
+  position: absolute;
+  text-decoration: none;
+  top: -3rem;
+  transition: top 120ms ease;
+  z-index: 10;
+}
+.skip-link:focus { top: 0.75rem; }
 .dashboard {
   display: grid;
   gap: 1rem;
   max-width: 860px;
   padding: 1.5rem;
 }
+.dashboard:focus { outline: none; }
 .tps-card {
   border: 1px solid rgba(45, 212, 191, 0.36);
   border-radius: 16px;
@@ -40,13 +67,14 @@ header {
 .connection-dot.loading { background: #93c5fd; box-shadow: 0 0 16px rgba(147, 197, 253, 0.65); }
 .eyebrow,
 .tps-label,
-.meta-grid span {
+.meta-grid dt {
   color: #93c5fd;
 }
 .tps-value {
   display: block;
   color: #67e8f9;
   font-size: clamp(3rem, 14vw, 7rem);
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 .status {
@@ -65,16 +93,25 @@ header {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+  margin: 0;
 }
-.meta-grid div {
+.meta-grid > div {
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 12px;
   padding: 1rem;
 }
-.meta-grid strong {
+.meta-grid dt {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.meta-grid dd {
   display: block;
   font-size: 1.4rem;
-  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  margin: 0.35rem 0 0;
 }
 .tps-chart-card {
   border: 1px solid rgba(45, 212, 191, 0.36);
@@ -87,6 +124,7 @@ header {
 .chart-sample-count {
   color: #93c5fd;
   font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
 }
 .chart-canvas {
   position: relative;
@@ -106,4 +144,11 @@ header {
   .meta-grid { grid-template-columns: 1fr; }
   .tps-chart-card { padding: 1rem; }
   .chart-canvas { height: clamp(180px, 56vw, 240px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
