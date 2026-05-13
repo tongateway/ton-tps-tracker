@@ -9,7 +9,7 @@ export default function App() {
   const history = useTpsHistory(ton)
 
   return (
-    <div>
+    <div className="app-shell">
       <Header />
       <main className="dashboard">
         <TpsDisplay {...ton} />

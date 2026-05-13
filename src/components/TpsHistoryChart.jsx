@@ -10,6 +10,7 @@ import {
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
 import { DEFAULT_WINDOW_SECONDS } from '../utils/tpsHistory.js'
+import styles from './TpsHistoryChart.module.css'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip)
 
@@ -87,14 +88,14 @@ export default function TpsHistoryChart({ history, windowSeconds = DEFAULT_WINDO
   const isEmpty = history.length === 0
 
   return (
-    <section className="tps-chart-card" aria-label={`TPS over the last ${windowSeconds} seconds`}>
-      <div className="card-header">
-        <p className="eyebrow">History · last {windowSeconds}s</p>
-        <span className="chart-sample-count">{history.length} sample{history.length === 1 ? '' : 's'}</span>
+    <section className={styles.card} aria-label={`TPS over the last ${windowSeconds} seconds`}>
+      <div className={styles.header}>
+        <p className={styles.eyebrow}>History · last {windowSeconds}s</p>
+        <span className={styles.sampleCount}>{history.length} sample{history.length === 1 ? '' : 's'}</span>
       </div>
-      <div className="chart-canvas">
+      <div className={styles.canvas}>
         {isEmpty ? (
-          <p className="chart-empty">Collecting samples…</p>
+          <p className={styles.empty}>Collecting samples…</p>
         ) : (
           <Line ref={chartRef} data={data} options={options} />
         )}

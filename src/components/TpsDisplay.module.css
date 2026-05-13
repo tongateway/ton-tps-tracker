@@ -1,0 +1,103 @@
+.card {
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card-grad);
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.6rem;
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.05), 0 24px 60px -32px rgba(14, 116, 144, 0.45);
+}
+
+.card.error { border-color: rgba(248, 113, 113, 0.5); }
+.card.loading { border-color: rgba(147, 197, 253, 0.4); }
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow {
+  color: var(--fg-eyebrow);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.dot {
+  border-radius: 999px;
+  display: inline-block;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.dot.ready { background: var(--success); box-shadow: 0 0 16px var(--success-glow); }
+.dot.error { background: var(--danger); box-shadow: 0 0 16px var(--danger-glow); }
+.dot.loading { background: #93c5fd; box-shadow: 0 0 16px rgba(147, 197, 253, 0.65); }
+
+.value {
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: clamp(3rem, 14vw, 7rem);
+  font-weight: 600;
+  line-height: 1;
+  text-shadow: 0 0 28px var(--accent-glow);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  color: var(--fg-eyebrow);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.status {
+  color: #a7f3d0;
+  display: grid;
+  gap: 0.25rem;
+  min-height: 1.4em;
+  margin: 0;
+}
+.status.error { color: #fca5a5; }
+.status.loading { color: #bfdbfe; }
+.status small {
+  color: var(--fg-muted);
+  font-size: 0.82rem;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.metaItem {
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  background: var(--bg-elev-2);
+}
+
+.metaItem span {
+  color: var(--fg-eyebrow);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.metaItem strong {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 620px) {
+  .card { padding: 1.1rem; }
+  .metaGrid { grid-template-columns: 1fr; gap: 0.55rem; }
+}

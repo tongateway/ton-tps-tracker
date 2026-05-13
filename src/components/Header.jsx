@@ -1,3 +1,12 @@
+import styles from './Header.module.css'
+
 export default function Header() {
-  return <header><h1>TON TPS Tracker</h1></header>
+  return (
+    <header className={styles.header}>
+      <span className={styles.brandDot} aria-hidden="true" />
+      <h1 className={styles.title}>
+        TON <em>TPS</em> Tracker
+      </h1>
+    </header>
+  )
 }
